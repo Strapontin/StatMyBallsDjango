@@ -61,6 +61,7 @@ class TeamComposition(models.Model):
 # Enum For Goal Types
 class GoalType(models.Model):
     label = models.CharField(max_length=60)
+    is_from_defense = models.BooleanField()
 
     def __str__(self):
         return self.label
