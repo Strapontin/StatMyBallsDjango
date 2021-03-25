@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Goal, GoalType, PlayerPosition
+from .models import Goal, GoalType, Player
 
 admin.site.register(Goal)
 admin.site.register(GoalType)
-admin.site.register(PlayerPosition)
+admin.site.register(Player)
