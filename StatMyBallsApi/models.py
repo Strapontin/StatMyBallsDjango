@@ -20,6 +20,14 @@ class TeamColor(models.Model):
         return self.name
 
 
+def init_team_color():
+    if not TeamColor.objects.filter(name="yellow").exists():
+        TeamColor(name="yellow", rgb_value="#FFFF00").save()
+
+    if not TeamColor.objects.filter(name="blue").exists():
+        TeamColor(name="blue", rgb_value="#0000FF").save()
+
+
 # Model for each team
 class Team(models.Model):
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE)

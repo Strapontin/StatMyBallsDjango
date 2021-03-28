@@ -1,28 +1,49 @@
-
-
-
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/create.css' %}">
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/create.js' %}"></script>
 
+<script>
+    var start_contest = '{% url "start_contest" %}'
+</script>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Baby karma</title>
-    </head>
-    <style>
-    </style>
-    <body>
-        <div class="content">
-            <button id="startContest">Démarrer</button>
-            <div class="teamContainer">
-                <div class="blueTeam">
-                    
-                </div>
-                <div class="yellowTeam">
 
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Baby karma</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div class="content">
+        <button id="startContest" disabled="disabled">Démarrer</button>
+        <div class="teamContainer">
+            <div class="blue team">
+                <team>Equipe Bleue</team>
+                <div data-pk="-1" class="playerSlot player1 empty"></div>
+                <div data-pk="-1" class="playerSlot player2 empty"></div>
+                <div class="players">
+                    {% for player in player_list %}
+                    <div class="playerName" data-pk="{{ player.pk }}">{{ player.fields.name }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="yellow team">
+                <team>Equipe Jaune</team>
+                <div data-pk="-1" class="playerSlot player1 empty"></div>
+                <div data-pk="-1" class="playerSlot player2 empty"></div>
+                <div class="players">
+                    {% for player in player_list %}
+                    <div class="playerName" data-pk="{{ player.pk }}">{{ player.fields.name }}</div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
