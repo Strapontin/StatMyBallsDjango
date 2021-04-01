@@ -4,7 +4,7 @@ from django.db import models
 # Model for each context
 class Contest(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField()
+    end_date = models.DateTimeField(null=True)
 
     def __str__(self):
         template = 'Démarré le {0.start_date}'
@@ -32,6 +32,7 @@ def init_team_color():
 class Team(models.Model):
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE)
     team_color = models.ForeignKey(TeamColor, on_delete=models.CASCADE)
+    score = models.IntegerField(default=0)
 
     def __str__(self):
         template = 'Equipe {0.team_color.name} du match démarré le {0.contest.start_date}'

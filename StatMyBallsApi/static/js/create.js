@@ -76,17 +76,26 @@ function onClickplayerSlot(event) {
  */
 function startContest() {
 
-    var data = {};
-    var players = [];
+    // Deactivate the button once it is clicked so the same team cannot be created multiple times
+    $("#startContest").attr("disabled", null);
 
-    // Save the pk of the players
+    var data = {};
+    var playerTeams = [];
+    var color;
+
+    // Save the pk of the players and their respective team color
     $(".playerSlot").each(function () {
 
-        players.push($(this).data("pk"));
+        color = $(this).parents(".team").hasClass("blue") ? "blue" : "yellow";
+
+        playerTeams.push(JSON.stringify({
+            player: $(this).data("pk"),
+            color: color
+        }));
     });
 
     data = {
-        players: players,
+        player_teams: playerTeams,
     };
 
     console.log(data)
