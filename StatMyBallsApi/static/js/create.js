@@ -108,7 +108,7 @@ function startContest() {
         console.log("Retour ajaxCall");
         console.log(data);
 
-        // window.location.href = data.url;
+        window.location.href = data.url;
     }).fail(function (data) {
         console.log('Erreur ajaxCall');
         console.log(data);

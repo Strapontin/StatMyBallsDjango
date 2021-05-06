@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.dateformat import format
 
 
 # Model for each context
@@ -7,7 +8,11 @@ class Contest(models.Model):
     end_date = models.DateTimeField(null=True)
 
     def __str__(self):
-        template = 'Démarré le {0.start_date}'
+        date_str = format(self.start_date, "d/m/Y")
+        time_str = format(self.start_date, "G:i:s")
+
+        template = f'Démarré le {date_str} à {time_str}'
+
         return template.format(self)
 
 

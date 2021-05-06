@@ -1,0 +1,29 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/all_contests.css' %}">
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/all_contests.js' %}"></script>
+<script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Baby karma</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div class="content">
+        {% for contest in contests %}
+        <div class="contest-container">
+            <div>{{ contest.contest }}</div>
+            <div>{{ contest.team }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,4 @@
+django
+gunicorn
+django-heroku
+fontawesome-free==5.15.3

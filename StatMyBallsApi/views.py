@@ -22,16 +22,16 @@ def start_contest(request):
     player_teams = request.GET.getlist("player_teams[]")
 
     # Creating a new match
-    contest = models.Contest()
-    contest.save()
+    current_contest = models.Contest()
+    current_contest.save()
 
     # Creating both teams in db before adding players
     team_color_blue = models.TeamColor.objects.get(name="blue")
     team_color_yellow = models.TeamColor.objects.get(name="yellow")
 
-    team_blue = models.Team(contest=contest, team_color=team_color_blue)
+    team_blue = models.Team(contest=current_contest, team_color=team_color_blue)
     team_blue.save()
-    team_yellow = models.Team(contest=contest, team_color=team_color_yellow)
+    team_yellow = models.Team(contest=current_contest, team_color=team_color_yellow)
     team_yellow.save()
 
     # Adding players to teams
@@ -48,14 +48,43 @@ def start_contest(request):
         models.TeamComposition(team=team_to_join, player=player).save()
 
     # Teams are created, now we redirect the user to the contest page
-    result = {'status': 200, 'url': f'/contest/{contest.id}'}
+    result = {'status': 200, 'url': f'/contest/{current_contest.id}'}
 
     return JsonResponse(result)
 
 
 def contest(request, contest_id):
-    contest = models.Contest.objects.get(pk=contest_id)
+    current_contest = models.Contest.objects.get(pk=contest_id)
+
+    print(current_contest)
+
+    goal_types = serializers.serialize("python", models.GoalType.objects.all())
 
     return render(request, 'StatMyBallsApi/contest.html', {
-        'player_list': player_list
+        'contest': current_contest,
+        'goal_types': goal_types
+    })
+
+
+class Contest:
+    contest = ""
+    team = ""
+
+
+def all_contests(request):
+    all_contest = []
+
+    for contest in models.Contest.objects.all():
+        c = Contest()
+        c.contest = contest
+        c.team = models.Team.objects.filter(contest=contest)
+
+        all_contest.append(c)
+
+    print(all_contest)
+
+    # contests = serializers.serialize("python", my_contest)
+
+    return render(request, 'StatMyBallsApi/all_contests.html', {
+        'contests': all_contest,
     })

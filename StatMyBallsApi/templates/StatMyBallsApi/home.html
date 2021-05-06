@@ -1,23 +1,37 @@
-
-
-
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+<script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
 
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Baby karma</title>
-    </head>
-    <style>
-    </style>
-    <body>
-        <div class="content">
-            <h3>Parties :</h3>
-            <div cass="contest-list">
-                
+
+<head>
+    <title>Baby karma</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div class="content">
+        <div id="menu">
+            <div id="new-contest" class="menu-content">
+                <i class="fas fa-plus"></i>
+                <div class="title-name">Nouvelle partie</div>
+            </div>
+            <div id="all-contests" class="menu-content">
+                <i class="fas fa-gamepad"></i>
+                <div class="title-name">Toutes les parties</div>
+            </div>
+            <div id="stats" class="menu-content disabled">
+                <i class="fas fa-chart-bar"></i>
+                <div class="title-name">Stats</div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
