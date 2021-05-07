@@ -71,7 +71,7 @@ class GoalType(models.Model):
         return self.label
 
 
-# Model for Gvoals Table
+# Model for Goals Table
 class Goal(models.Model):
     goal_date = models.DateTimeField('goal_date', auto_now_add=True)
     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='%(class)s_player_scored')

@@ -1,4 +1,35 @@
+.content {
+    padding: 1rem;
+}
+
 .contest-container {
     display: flex;
-    margin: 1rem;
+    flex: 0 0 4rem;
+    justify-content: space-around;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    margin: 4px 0;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+.content-teams {
+    display: flex;
+    align-items: center;
+}
+
+.blue-score,
+.yellow-score {
+    margin: 0 1rem;
+}
+
+.blue-players,
+.blue-score {
+    color: blue;
+}
+
+.yellow-players,
+.yellow-score {
+    color: yellow;
 }

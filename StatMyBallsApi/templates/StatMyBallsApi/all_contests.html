@@ -18,9 +18,21 @@
 <body>
     <div class="content">
         {% for contest in contests %}
-        <div class="contest-container">
-            <div>{{ contest.contest }}</div>
-            <div>{{ contest.team }}</div>
+        <div class="contest-container" data-pk="{{ contest.pk }}">
+            <div class="contest-name">{{ contest.contest }}</div>
+            <div class="content-teams">
+                <div class="blue-players">
+                    <div>{{ contest.blue_p1 }}</div>
+                    <div>{{ contest.blue_p2 }}</div>
+                </div>
+                <span class="blue-score">{{ contest.blue_score }}</span>
+                <span class="team-delimiter">-</span>
+                <span class="yellow-score">{{ contest.yellow_score }}</span>
+                <div class="yellow-players">
+                    <div>{{ contest.yellow_p1 }}</div>
+                    <div>{{ contest.yellow_p2 }}</div>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>

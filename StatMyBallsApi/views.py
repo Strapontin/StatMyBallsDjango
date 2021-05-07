@@ -44,7 +44,8 @@ def start_contest(request):
         if team['color'] == "blue":
             team_to_join = team_blue
         else:
-            team_to_join = team_blue
+            team_to_join = team_yellow
+
         models.TeamComposition(team=team_to_join, player=player).save()
 
     # Teams are created, now we redirect the user to the contest page
@@ -68,22 +69,45 @@ def contest(request, contest_id):
 
 class Contest:
     contest = ""
-    team = ""
+    team_blue = ""
+    team_yellow = ""
+
+    blue_score = -1
+    yellow_score = -1
 
 
 def all_contests(request):
     all_contest = []
 
+    team_color_blue = models.TeamColor.objects.filter(name="blue")[0]
+    team_color_yellow = models.TeamColor.objects.filter(name="yellow")[0]
+
     for contest in models.Contest.objects.all():
         c = Contest()
         c.contest = contest
-        c.team = models.Team.objects.filter(contest=contest)
+
+        # The team contains data about the players, the color, and the score
+        team_blue = models.Team.objects.get(contest=contest, team_color=team_color_blue)
+        team_yellow = models.Team.objects.get(contest=contest, team_color=team_color_yellow)
+
+        blue_composition = models.TeamComposition.objects.filter(team=team_blue)
+        yellow_composition = models.TeamComposition.objects.filter(team=team_yellow)
+
+        blue_players = list(blue_composition.values_list("player__name", flat=True))
+        yellow_players = list(yellow_composition.values_list("player__name", flat=True))
+
+        # Save specific data to show in front
+        c.blue_p1 = blue_players[0]
+        c.blue_p2 = blue_players[1]
+        c.yellow_p1 = yellow_players[0]
+        c.yellow_p2 = yellow_players[1]
+
+        c.blue_score = team_blue.score
+        c.yellow_score = team_yellow.score
+
+        c.pk = contest.pk
 
         all_contest.append(c)
-
-    print(all_contest)
-
-    # contests = serializers.serialize("python", my_contest)
 
     return render(request, 'StatMyBallsApi/all_contests.html', {
         'contests': all_contest,
