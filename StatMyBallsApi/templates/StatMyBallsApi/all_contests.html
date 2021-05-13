@@ -22,15 +22,17 @@
             <div class="contest-name">{{ contest.contest }}</div>
             <div class="content-teams">
                 <div class="blue-players">
-                    <div>{{ contest.blue_p1 }}</div>
-                    <div>{{ contest.blue_p2 }}</div>
+                    {% for player in contest.blue_players %}
+                    <div>{{ player }}</div>
+                    {% endfor %}
                 </div>
                 <span class="blue-score">{{ contest.blue_score }}</span>
                 <span class="team-delimiter">-</span>
                 <span class="yellow-score">{{ contest.yellow_score }}</span>
                 <div class="yellow-players">
-                    <div>{{ contest.yellow_p1 }}</div>
-                    <div>{{ contest.yellow_p2 }}</div>
+                    {% for player in contest.yellow_players %}
+                    <div>{{ player }}</div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

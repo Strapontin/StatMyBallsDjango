@@ -22,3 +22,12 @@ body {
     cursor: unset !important;
     background-color: #808080 !important;
 }
+
+.content svg {
+    flex: 1;
+    font-size: 5rem;
+}
+
+.fat {
+    font-size: 5rem;
+}

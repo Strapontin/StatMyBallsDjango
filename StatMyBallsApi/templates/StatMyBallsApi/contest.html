@@ -3,10 +3,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/contest.css' %}">
 <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/contest.js' %}"></script>
+<script src="{% static 'fontawesome_free/js/all.min.js' %}"></script>
 
-<script>
-    var start_contest = '{% url "start_contest" %}'
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -20,8 +18,42 @@
 <body>
     <div class="content">
         <p>{{ contest }}</p>
-            --
-        <p>{{ goal_types }}</p>
+        <div class="score">
+            <div class="blue-score">
+                <i class="fas fa-sort-up"></i>
+                <div class="fat">0</div>
+                <i class="fas fa-sort-down"></i>
+            </div>
+            <button id="end-game">Terminer la partie</button>
+            <div class="yellow-score">
+                <i class="fas fa-sort-up"></i>
+                <div class="fat">0</div>
+                <i class="fas fa-sort-down"></i>
+            </div>
+        </div>
+        <br>-<br>
+        <div class="score-detail-container">
+            <div class="player-scored">
+                {% for player in players %}
+                <div>{{ player }}</div>
+                {% endfor %}
+            </div>
+            <div class="goal-types">
+                <span>Buts de l'attaque</span>
+                {% for goal_type in goal_types_attack %}
+                <div data-pk="{{ goal_type.pk }}">{{ goal_type.fields.label }}</div>
+                {% endfor %}
+                <span>Buts de la défense</span>
+                {% for goal_type in goal_types_defense %}
+                <div data-pk="{{ goal_type.pk }}">{{ goal_type.fields.label }}</div>
+                {% endfor %}
+            </div>
+            <div class="player-scored-against">
+                {% for player in players %}
+                <div>{{ player }}</div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </body>
 
