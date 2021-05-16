@@ -17,40 +17,58 @@
 
 <body>
     <div class="content">
-        <p>{{ contest }}</p>
+        <p>{{ details.contest }}</p>
         <div class="score">
             <div class="blue-score">
-                <i class="fas fa-sort-up"></i>
-                <div class="fat">0</div>
-                <i class="fas fa-sort-down"></i>
+                <i class="fas fa-sort-up blue-score-up"></i>
+                <div class="fat score">0</div>
+                <i class="fas fa-sort-down blue-score-down"></i>
             </div>
             <button id="end-game">Terminer la partie</button>
             <div class="yellow-score">
-                <i class="fas fa-sort-up"></i>
-                <div class="fat">0</div>
-                <i class="fas fa-sort-down"></i>
+                <i class="fas fa-sort-up yellow-score-up"></i>
+                <div class="fat score">0</div>
+                <i class="fas fa-sort-down yellow-score-down"></i>
             </div>
         </div>
-        <br>-<br>
+
+        <button id="register-goal">Noter le but</button>
+
         <div class="score-detail-container">
+            <!-- Player who scored -->
             <div class="player-scored">
-                {% for player in players %}
-                <div>{{ player }}</div>
+                <div data-pk="-1" class="slot empty"></div>
+                {% for player in details.blue_composition %}
+                <div data-pk="{{player.player.pk}}">{{ player.player }}</div>
+                {% endfor %}
+                {% for player in details.yellow_composition %}
+                <div data-pk="{{player.player.pk}}">{{ player.player }}</div>
                 {% endfor %}
             </div>
-            <div class="goal-types">
-                <span>Buts de l'attaque</span>
-                {% for goal_type in goal_types_attack %}
-                <div data-pk="{{ goal_type.pk }}">{{ goal_type.fields.label }}</div>
-                {% endfor %}
-                <span>Buts de la défense</span>
-                {% for goal_type in goal_types_defense %}
-                <div data-pk="{{ goal_type.pk }}">{{ goal_type.fields.label }}</div>
-                {% endfor %}
+
+            <!-- What kind of goal was scored -->
+            <div class="goal-types-container">
+                <div data-pk="-1" class="slot empty"></div>
+                <div class="goal-types">
+                    <span>Buts de l'attaque</span>
+                    {% for goal_type in goal_types_attack %}
+                    <div data-pk="{{ goal_type.pk }}">{{ goal_type.fields.label }}</div>
+                    {% endfor %}
+                    <span>Buts de la défense</span>
+                    {% for goal_type in goal_types_defense %}
+                    <div data-pk="{{ goal_type.pk }}">{{ goal_type.fields.label }}</div>
+                    {% endfor %}
+                </div>
             </div>
+
+            <!-- Player who got scored against -->
             <div class="player-scored-against">
-                {% for player in players %}
-                <div>{{ player }}</div>
+                <div data-pk="-1" class="slot empty"></div>
+                {% for player in details.blue_composition %}
+                <div data-pk="{{player.player.pk}}">{{ player.player }}</div>
+                {% endfor %}
+                {% for player in details.yellow_composition %}
+                <div data-pk="{{player.player.pk}}">{{ player.player }}</div>
                 {% endfor %}
             </div>
         </div>

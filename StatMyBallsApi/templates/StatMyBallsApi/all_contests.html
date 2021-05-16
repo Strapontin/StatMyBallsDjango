@@ -17,21 +17,21 @@
 
 <body>
     <div class="content">
-        {% for contest in contests %}
-        <div class="contest-container" data-pk="{{ contest.pk }}">
-            <div class="contest-name">{{ contest.contest }}</div>
+        {% for contest_info in contests %}
+        <div class="contest-container" data-pk="{{ contest_info.contest.pk }}">
+            <div class="contest-name">{{ contest_info.contest }}</div>
             <div class="content-teams">
                 <div class="blue-players">
-                    {% for player in contest.blue_players %}
-                    <div>{{ player }}</div>
+                    {% for player in contest_info.blue_composition %}
+                    <div>{{ player.player }}</div>
                     {% endfor %}
                 </div>
-                <span class="blue-score">{{ contest.blue_score }}</span>
+                <span class="blue-score">{{ contest_info.blue_score }}</span>
                 <span class="team-delimiter">-</span>
-                <span class="yellow-score">{{ contest.yellow_score }}</span>
+                <span class="yellow-score">{{ contest_info.yellow_score }}</span>
                 <div class="yellow-players">
-                    {% for player in contest.yellow_players %}
-                    <div>{{ player }}</div>
+                    {% for player in contest_info.yellow_composition %}
+                    <div>{{ player.player }}</div>
                     {% endfor %}
                 </div>
             </div>

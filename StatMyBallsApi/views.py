@@ -63,51 +63,27 @@ def contest(request, contest_id):
     goal_types_attack = serializers.serialize("python", models.GoalType.objects.filter(is_from_defense=False))
     goal_types_defense = serializers.serialize("python", models.GoalType.objects.filter(is_from_defense=True))
 
-    c = Contest()
-    c.contest = current_contest
-    c.set_contest_details()
+    contest = Contest()
+    contest.contest = current_contest
+    contest.set_contest_details()
 
-    players_in_game = c.blue_players
-    players_in_game.extend(c.yellow_players)
+    # players_in_game = c.blue_players
+    # players_in_game.extend(c.yellow_players)
 
     return render(request, 'StatMyBallsApi/contest.html', {
-        'contest': current_contest,
+        'details': contest,
         'goal_types_attack': goal_types_attack,
         'goal_types_defense': goal_types_defense,
-        'players': players_in_game,
     })
-
 
 
 def all_contests(request):
     all_contest = []
 
-    team_color_blue = models.TeamColor.objects.filter(name="blue")[0]
-    team_color_yellow = models.TeamColor.objects.filter(name="yellow")[0]
-
     for contest in models.Contest.objects.all():
         c = Contest()
         c.contest = contest
         c.set_contest_details()
-
-        # The team contains data about the players, the color, and the score
-        # team_blue = models.Team.objects.get(contest=contest, team_color=team_color_blue)
-        # team_yellow = models.Team.objects.get(contest=contest, team_color=team_color_yellow)
-        #
-        # blue_composition = models.TeamComposition.objects.filter(team=team_blue)
-        # yellow_composition = models.TeamComposition.objects.filter(team=team_yellow)
-        #
-        # blue_players = list(blue_composition.values_list("player__name", flat=True))
-        # yellow_players = list(yellow_composition.values_list("player__name", flat=True))
-
-        # Save specific data to show in front
-        # c.blue_p1 = blue_players[0]
-        # c.blue_p2 = blue_players[1]
-        # c.yellow_p1 = yellow_players[0]
-        # c.yellow_p2 = yellow_players[1]
-
-        # c.blue_score = team_blue.score
-        # c.yellow_score = team_yellow.score
 
         all_contest.append(c)
 
